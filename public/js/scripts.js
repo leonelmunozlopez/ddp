@@ -1,6 +1,6 @@
 $(document).ready(function() {
-    $('#login input[name=user]').focus();
-    $('#login input[name=user]').blur(function() {
+    $('#loginForm input[name=email]').focus();
+    $('#loginForm input[name=email]').blur(function() {
         $(this).val($.trim($(this).val()));
     });
 });
