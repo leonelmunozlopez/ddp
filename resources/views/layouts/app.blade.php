@@ -7,18 +7,7 @@
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
-
-        <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
-
-        <!-- Fonts -->
-        <link rel="dns-prefetch" href="//fonts.gstatic.com" />
-        <link
-            href="https://fonts.googleapis.com/css?family=Nunito"
-            rel="stylesheet"
-            type="text/css"
-        />
+        <title>Continuum - DDP</title>
 
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
@@ -28,7 +17,7 @@
             <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
                 <div class="container">
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        Dinámica de Proyectos
                     </a>
                     <button
                         class="navbar-toggler"
@@ -52,23 +41,7 @@
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ml-auto">
                             <!-- Authentication Links -->
-                            @guest
-                            <li class="nav-item">
-                                <a
-                                    class="nav-link"
-                                    href="{{ route('login') }}"
-                                    >{{ __('Login') }}</a
-                                >
-                            </li>
-                            @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a
-                                    class="nav-link"
-                                    href="{{ route('register') }}"
-                                    >{{ __('Register') }}</a
-                                >
-                            </li>
-                            @endif @else
+                            @auth
                             <li class="nav-item dropdown">
                                 <a
                                     id="navbarDropdown"
@@ -90,11 +63,18 @@
                                 >
                                     <a
                                         class="dropdown-item"
+                                        href="{{ route('profile') }}"
+                                    >
+                                        {{ __('Mi cuenta') }}
+                                    </a>
+
+                                    <a
+                                        class="dropdown-item"
                                         href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"
                                     >
-                                        {{ __('Logout') }}
+                                        {{ __('Salir') }}
                                     </a>
 
                                     <form
@@ -107,7 +87,7 @@
                                     </form>
                                 </div>
                             </li>
-                            @endguest
+                            @endauth
                         </ul>
                     </div>
                 </div>
@@ -117,5 +97,9 @@
                 @yield('content')
             </main>
         </div>
+
+        <!-- Scripts -->
+        <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="{{ asset('js/scripts.js') }}" defer></script>
     </body>
 </html>

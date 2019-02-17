@@ -3,21 +3,54 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Acceso usuarios') }}</div>
+                <div class="card-header">{{ __('Mi cuenta') }}</div>
 
                 <div class="card-body">
+                    @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                    @endif
+
                     <form
-                        id="loginForm"
+                        id="profileForm"
                         method="POST"
-                        action="{{ route('login') }}"
+                        action="{{ route('updateProfile') }}"
                     >
                         @csrf
 
                         <div class="form-group row">
                             <label
+                                for="name"
+                                class="col-md-4 col-form-label text-md-right"
+                                >{{ __('Nombre') }}</label
+                            >
+
+                            <div class="col-md-6">
+                                <input
+                                    id="name"
+                                    type="text"
+                                    class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}"
+                                    name="name"
+                                    value="{{ old('name', $user->name) }}"
+                                    required
+                                />
+
+                                @if ($errors->has('name'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong
+                                        >{{ $errors->first('name') }}</strong
+                                    >
+                                </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label
                                 for="email"
                                 class="col-md-4 col-form-label text-md-right"
-                                >{{ __('Usuario') }}</label
+                                >{{ __('E-Mail') }}</label
                             >
 
                             <div class="col-md-6">
@@ -26,9 +59,8 @@
                                     type="email"
                                     class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
                                     name="email"
-                                    value="{{ old('email') }}"
+                                    value="{{ old('email', $user->email) }}"
                                     required
-                                    autofocus
                                 />
 
                                 @if ($errors->has('email'))
@@ -45,7 +77,7 @@
                             <label
                                 for="password"
                                 class="col-md-4 col-form-label text-md-right"
-                                >{{ __('Contraseña') }}</label
+                                >{{ __('Cambiar contraseña') }}</label
                             >
 
                             <div class="col-md-6">
@@ -54,7 +86,6 @@
                                     type="password"
                                     class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
                                     name="password"
-                                    required
                                 />
 
                                 @if ($errors->has('password'))
@@ -68,37 +99,27 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input"
-                                    type="checkbox" name="remember"
-                                    id="remember"
-                                    {{ old('remember') ? 'checked' : '' }}>
+                            <label
+                                for="password-confirm"
+                                class="col-md-4 col-form-label text-md-right"
+                                >{{ __('Confirmar contraseña') }}</label
+                            >
 
-                                    <label
-                                        class="form-check-label"
-                                        for="remember"
-                                    >
-                                        {{ __('Recordar sesión') }}
-                                    </label>
-                                </div>
+                            <div class="col-md-6">
+                                <input
+                                    id="password-confirm"
+                                    type="password"
+                                    class="form-control"
+                                    name="password_confirmation"
+                                />
                             </div>
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
+                            <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Ingresar') }}
+                                    {{ __('Actualizar datos') }}
                                 </button>
-
-                                @if (Route::has('password.request'))
-                                <a
-                                    class="btn btn-link"
-                                    href="{{ route('password.request') }}"
-                                >
-                                    {{ __('Olvidé mi contraseña') }}
-                                </a>
-                                @endif
                             </div>
                         </div>
                     </form>

@@ -19,4 +19,7 @@ Route::get('/home', 'DashboardController@index')->name('home');
 Route::get('/login', 'AuthController@login');
 Route::post('/auth', 'AuthController@auth');
 
+Route::get('/profile', 'ProfileController@index')->name('profile');
+Route::post('/profile', 'ProfileController@update')->name('updateProfile');
+
 Auth::routes();
