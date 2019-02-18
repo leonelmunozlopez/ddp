@@ -11,6 +11,12 @@
 
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
+        <link
+            rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+            integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+            crossorigin="anonymous"
+        />
     </head>
     <body>
         <div id="app">
@@ -36,7 +42,15 @@
                         id="navbarSupportedContent"
                     >
                         <!-- Left Side Of Navbar -->
-                        <ul class="navbar-nav mr-auto"></ul>
+                        <ul class="navbar-nav mr-auto">
+                            <a
+                                href="{{ route('createDynamic') }}"
+                                class="btn btn-success"
+                            >
+                                <i class="fa fa-plus"></i>
+                                Nueva dinámica</a
+                            >
+                        </ul>
 
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ml-auto">
@@ -100,6 +114,7 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="{{ asset('js/autosize.min.js') }}" defer></script>
         <script src="{{ asset('js/scripts.js') }}" defer></script>
     </body>
 </html>
