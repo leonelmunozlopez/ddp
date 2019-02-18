@@ -12,14 +12,19 @@
  */
 
 Route::get('/', function () {
-    return redirect('/login');
+    return redirect('/dinamicas');
 });
 
-Route::get('/home', 'DashboardController@index')->name('home');
-Route::get('/login', 'AuthController@login');
-Route::post('/auth', 'AuthController@auth');
+Route::get('/dinamicas', 'DynamicController@index')->name('dashboard');
+Route::get('/login', 'AuthController@login')->name('login');
+Route::post('/login', 'AuthController@auth')->name('doLogin');
 
-Route::get('/profile', 'ProfileController@index')->name('profile');
-Route::post('/profile', 'ProfileController@update')->name('updateProfile');
+Route::get('/perfil', 'ProfileController@index')->name('profile');
+Route::post('/perfil', 'ProfileController@update')->name('updateProfile');
+
+Route::get('/dinamicas/crear', 'DynamicController@create')->name('createDynamic');
+Route::post('/dinamicas', 'DynamicController@store')->name('storeDynamic');
+Route::get('/dinamicas/:code', 'DynamicController@show')->name('showDynamic');
+Route::get('/dinamicas/:code/editar', 'DynamicController@edit')->name('editDynamic');
 
 Auth::routes();
