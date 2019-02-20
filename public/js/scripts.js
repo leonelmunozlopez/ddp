@@ -38,4 +38,17 @@ $(document).ready(function() {
         console.error('Action:', e.action);
         console.error('Trigger:', e.trigger);
     });
+
+    // Store Project
+    $('#projectForm').submit(function(event) {
+        event.preventDefault();
+
+        $.post($(this).attr('action'), $(this).serialize()).done(function(
+            data
+        ) {
+            $('#projectModal').modal('hide');
+        });
+
+        return false;
+    });
 });

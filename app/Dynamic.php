@@ -10,6 +10,11 @@ class Dynamic extends Model
 
     protected $dates = ['ends_at', 'created_at', 'updated_at'];
 
+    public function projects()
+    {
+        return $this->hasMany('App\Project');
+    }
+
     public function statusLabel()
     {
 

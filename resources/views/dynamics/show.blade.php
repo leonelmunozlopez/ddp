@@ -1,7 +1,7 @@
 @extends('layouts.app') @section('content')
 
 <div id="projectModal" class="modal fade" tabindex="-1" role="dialog">
-    <form id="proyectForm" action="{{ route('storeDynamic') }}" method="POST">
+    <form id="projectForm" action="{{ route('storeProject') }}">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -19,7 +19,12 @@
                     @csrf
 
                     <div class="form-group">
-                        <label for="title">Email de usuario</label>
+                        <label for="title">Usuario</label>
+                        @auth
+                        <p>
+                            <strong>{{ Auth::user()->email }}</strong>
+                        </p>
+                        @else
                         <input
                             id="email"
                             name="email"
@@ -29,6 +34,7 @@
                             required
                             autofocus
                         />
+                        @endauth
                     </div>
 
                     <div class="form-group">
@@ -55,7 +61,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary">
                         Guardar
                     </button>
                     <button
