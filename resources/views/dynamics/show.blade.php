@@ -1,11 +1,92 @@
 @extends('layouts.app') @section('content')
+
+<div id="projectModal" class="modal fade" tabindex="-1" role="dialog">
+    <form id="proyectForm" action="{{ route('storeDynamic') }}" method="POST">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Nuevo Proyecto</h5>
+                    <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                    >
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @csrf
+
+                    <div class="form-group">
+                        <label for="title">Email de usuario</label>
+                        <input
+                            id="email"
+                            name="email"
+                            type="email"
+                            class="form-control"
+                            placeholder="usuario@continuum.cl"
+                            required
+                            autofocus
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="title">Título</label>
+                        <input
+                            id="title"
+                            name="title"
+                            type="text"
+                            class="form-control"
+                            required
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Detalles</label>
+
+                        <textarea
+                            id="details"
+                            type="details"
+                            name="details"
+                            class="form-control autosize"
+                        >
+                        </textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">
+                        Guardar
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-dismiss="modal"
+                    >
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
 <div class="container">
     <div class="row">
         <div class="col-4">
             <div class="card">
-                <h5 class="card-header">Dinámica {{ $dynamic->code }}</h5>
+                <h5 class="card-header">
+                    Dinámica {{ $dynamic->code }}
 
-                <div class="card-body">
+                    <span style="float: right;">
+                        {!! $dynamic->statusLabel() !!}
+                    </span>
+                </h5>
+
+                <div
+                    class="card-body"
+                    style="min-height: 120px; max-height: 220px; overflow: auto"
+                >
                     {{ nl2br($dynamic->description) }}
                 </div>
 
@@ -18,11 +99,11 @@
                             class="form-control"
                             readonly
                         />
-                        <div class="input-group-append">
+                        <div class="input-group-append mb-3">
                             <button
                                 type="button"
                                 data-clipboard-target="#dlink"
-                                class="btn btn-outline-secondary copy-button"
+                                class="btn btn-outline-info copy-button"
                             >
                                 <i class="fa fa-clipboard"></i>
                                 <span style="display: inline-block; width: 64px"
@@ -30,6 +111,30 @@
                                 >
                             </button>
                         </div>
+                    </div>
+
+                    @auth
+                    <div class="mb-3">
+                        <a
+                            href="{{ route('editDynamic', ['code' => $dynamic->code]) }}"
+                            class="btn btn-secondary"
+                        >
+                            <i class="fa fa-edit"></i>
+                            Editar dinámica</a
+                        >
+                    </div>
+                    @endauth
+
+                    <div>
+                        <button
+                            type="button"
+                            data-toggle="modal"
+                            data-target="#projectModal"
+                            class="btn btn-success"
+                        >
+                            <i class="fa fa-lightbulb"></i>
+                            Postular proyecto
+                        </button>
                     </div>
                 </div>
             </div>

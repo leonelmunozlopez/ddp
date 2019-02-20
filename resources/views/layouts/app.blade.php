@@ -43,6 +43,7 @@
                         class="collapse navbar-collapse"
                         id="navbarSupportedContent"
                     >
+                        @auth
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mr-auto">
                             <a
@@ -53,6 +54,7 @@
                                 Nueva dinámica</a
                             >
                         </ul>
+                        @endauth
 
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ml-auto">
@@ -103,6 +105,14 @@
                                     </form>
                                 </div>
                             </li>
+                            @else
+                            <a
+                                class="nav-link"
+                                href="{{ route('login') }}"
+                                role="button"
+                            >
+                                Login
+                            </a>
                             @endauth
                         </ul>
                     </div>
