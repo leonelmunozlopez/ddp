@@ -8,6 +8,8 @@ class Dynamic extends Model
 {
     protected $fillable = ['ends_at', 'description'];
 
+    protected $dates = ['ends_at', 'created_at', 'updated_at'];
+
     public function statusLabel()
     {
 

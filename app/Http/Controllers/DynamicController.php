@@ -10,7 +10,7 @@ class DynamicController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => 'show']);
     }
 
     public function index()
@@ -38,5 +38,11 @@ class DynamicController extends Controller
         }
 
         return redirect()->route('storeDynamic')->with('error', 'Ha ocurrido un error');
+    }
+
+    public function show($code)
+    {
+        $dynamic = Dynamic::where('code', $code)->firstOrFail();
+        return view('dynamics.show', ['dynamic' => $dynamic]);
     }
 }
