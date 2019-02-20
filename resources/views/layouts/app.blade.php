@@ -10,13 +10,15 @@
         <title>Continuum - DDP</title>
 
         <!-- Styles -->
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
         <link
             rel="stylesheet"
             href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
             integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
             crossorigin="anonymous"
         />
+
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
+        <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
     </head>
     <body>
         <div id="app">
@@ -115,6 +117,7 @@
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
         <script src="{{ asset('js/autosize.min.js') }}" defer></script>
+        <script src="{{ asset('js/clipboard.min.js') }}" defer></script>
         <script src="{{ asset('js/scripts.js') }}" defer></script>
     </body>
 </html>

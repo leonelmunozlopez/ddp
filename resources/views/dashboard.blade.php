@@ -8,7 +8,8 @@
         <table class="table table-borderless">
             <thead>
                 <tr>
-                    <th scope="col">Fecha</th>
+                    <th scope="col">Código</th>
+                    <th scope="col">Fecha de cierre</th>
                     <th scope="col">Descripción</th>
                     <th scope="col">Proyectos</th>
                     <th scope="col">Estado</th>
@@ -18,12 +19,13 @@
                 @foreach ($dynamics as $dynamic)
                 <tr>
                     <th scope="row">
-                        {{ $dynamic->ends_at }}
-                    </th>
-                    <td>
-                        <a href="#">
-                            {{ $dynamic->description }}
+                        <a href="{{ url('/dinamicas/' . $dynamic->code) }}">
+                            {{ $dynamic->code }}
                         </a>
+                    </th>
+                    <td>{{ $dynamic->ends_at->format('d/m/Y H:i') }} hrs.</td>
+                    <td>
+                        {{ $dynamic->description }}
                     </td>
                     <td>
                         {{ $dynamic->id }}

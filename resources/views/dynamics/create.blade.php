@@ -81,6 +81,11 @@
                                 <button type="submit" class="btn btn-primary">
                                     Guardar
                                 </button>
+                                <a
+                                    href="{{ route('dashboard') }}"
+                                    class="btn btn-default"
+                                    >Volver</a
+                                >
                             </div>
                         </div>
                     </form>
