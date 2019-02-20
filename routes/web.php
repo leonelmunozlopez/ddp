@@ -24,7 +24,7 @@ Route::post('/perfil', 'ProfileController@update')->name('updateProfile');
 
 Route::get('/dinamicas/crear', 'DynamicController@create')->name('createDynamic');
 Route::post('/dinamicas', 'DynamicController@store')->name('storeDynamic');
-Route::get('/dinamicas/:code', 'DynamicController@show')->name('showDynamic');
-Route::get('/dinamicas/:code/editar', 'DynamicController@edit')->name('editDynamic');
+Route::get('/dinamicas/{code}', 'DynamicController@show')->name('showDynamic');
+Route::get('/dinamicas/{code}/editar', 'DynamicController@edit')->name('editDynamic');
 
 Auth::routes();
