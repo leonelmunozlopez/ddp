@@ -1,3 +1,41 @@
 #login {
     padding-top: 10%;
 }
+
+.time-line {
+    position: relative;
+    padding-left: 220px;
+    padding-right: 25px;
+}
+
+.time-line::before {
+    content: ' ';
+    position: absolute;
+    left: 180px;
+    top: 12px;
+    bottom: 52px;
+    width: 6px;
+    background: #ddd;
+}
+
+.time-line-date {
+    position: absolute;
+    left: -160px;
+    color: #444;
+    font-size: 12px;
+    font-weight: bold;
+    width: 96px;
+    text-align: right;
+}
+
+.time-line-date::before {
+    position: absolute;
+    content: ' ';
+    width: 24px;
+    height: 24px;
+    border-radius: 100%;
+    border: 4px solid #444;
+    background: #fff;
+    right: -38px;
+    top: 4px;
+}
