@@ -81,7 +81,7 @@
                                     Guardar cambios
                                 </button>
                                 <a
-                                    href="{{ route('dashboard') }}"
+                                    href="{{ route('showDynamic', ['code' => $dynamic->code]) }}"
                                     class="btn btn-default"
                                     >Volver</a
                                 >

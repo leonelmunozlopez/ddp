@@ -64,6 +64,17 @@ class DynamicController extends Controller
         return redirect()->route('showDynamic', ['code' => $dynamic->code])->with('success', 'Dinámica editada correctamente');
     }
 
+    public function open($id)
+    {
+        $dynamic = Dynamic::findOrFail($id);
+
+        // Update status
+        $dynamic->status = 'open';
+        $dynamic->update();
+
+        return response()->json('success');
+    }
+
     public function delete($id)
     {
         $dynamic = Dynamic::findOrFail($id);
@@ -76,6 +87,6 @@ class DynamicController extends Controller
         $dynamic->status = 'deleted';
         $dynamic->update();
 
-        return response()->json(['url' => route('dashboard')]);
+        return response()->json('success');
     }
 }
