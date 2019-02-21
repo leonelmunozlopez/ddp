@@ -169,11 +169,11 @@ $(document).ready(function() {
                     .html('Preferencias enviadas correctamente')
                     .show();
 
-                $('#voteModal').modal('hide');
+                // $('#voteModal').modal('hide');
 
-                setTimeout(function() {
-                    location.reload();
-                }, 800);
+                // setTimeout(function() {
+                //     location.reload();
+                // }, 800);
             })
             .fail(function() {
                 $(form)

@@ -31,7 +31,7 @@ Route::put('/dinamicas/{id}/open', 'DynamicController@open')->name('openDynamic'
 Route::put('/dinamicas/{id}/close', 'DynamicController@close')->name('closeDynamic');
 Route::delete('/dinamicas/{id}', 'DynamicController@delete')->name('deleteDynamic');
 
-Route::post('/vote', 'DynamicController@vote')->name('vote');
+Route::post('/vote', 'VoteController@store')->name('vote');
 
 Route::post('/proyectos', 'ProjectController@store')->name('storeProject');
 Route::put('/proyectos/{id}', 'ProjectController@update')->name('updateProject');

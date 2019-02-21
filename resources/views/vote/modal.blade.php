@@ -53,7 +53,7 @@
                                 {{ $project->title }}
 
                                 <input
-                                    type="hidden"
+                                    type="text"
                                     name="options[]"
                                     value="{{ $project->id }}"
                                 />

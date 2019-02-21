@@ -1,7 +1,7 @@
 @extends('layouts.app') @section('content')
 
 <div>
-    @include('dynamics.vote') @include('dynamics.project-modal')
+    @include('vote.modal') @include('dynamics.project-modal')
 </div>
 
 <div class="container">
