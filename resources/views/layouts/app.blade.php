@@ -128,6 +128,7 @@
         <script src="{{ asset('js/app.js') }}" defer></script>
         <script src="{{ asset('js/autosize.min.js') }}" defer></script>
         <script src="{{ asset('js/clipboard.min.js') }}" defer></script>
+        <script src="{{ asset('js/jquery.sortable.min.js') }}" defer></script>
         <script src="{{ asset('js/scripts.js') }}" defer></script>
     </body>
 </html>

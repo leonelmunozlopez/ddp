@@ -86,6 +86,31 @@ $(document).ready(function() {
         return false;
     });
 
+    // Open Dynamic
+    $('#openDynamic').click(function(event) {
+        event.preventDefault();
+
+        if (
+            !confirm('Está seguro que desea iniciar el proceso de votaciones?')
+        ) {
+            return;
+        }
+
+        $.ajax({
+            method: 'PUT',
+            url: $(this).attr('href'),
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            },
+        })
+            .done(function() {
+                location.reload();
+            })
+            .fail(function() {
+                alert('Ha ocurrido un error, intente nuevamente');
+            });
+    });
+
     // Delete
     $('#deleteDynamic').click(function(event) {
         event.preventDefault();
@@ -101,11 +126,71 @@ $(document).ready(function() {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
             },
         })
-            .done(function(data) {
-                location.href = data.url;
+            .done(function() {
+                location.reload();
             })
             .fail(function() {
                 alert('Ha ocurrido un error, intente nuevamente');
             });
+    });
+
+    // Sort votes
+    $('#vote-options .list-group')
+        .sortable({
+            placeholderClass: 'list-group-item',
+        })
+        .bind('sortupdate', function() {
+            $('#vote-options .list-group li').each(function(i) {
+                $(this)
+                    .find('.badge')
+                    .text(i + 1);
+            });
+        });
+
+    // VOTE
+    $('#voteForm').submit(function(event) {
+        event.preventDefault();
+
+        var form = $(this);
+
+        $(form)
+            .find('button[type=submit]')
+            .text('Enviando...');
+        $(form)
+            .find('button')
+            .attr('disabled', true);
+
+        $.post($(form).attr('action'), $(form).serialize())
+            .done(function(data) {
+                $(form)
+                    .find('.alert')
+                    .removeClass('alert-danger')
+                    .addClass('alert-success')
+                    .html('Preferencias enviadas correctamente')
+                    .show();
+
+                $('#voteModal').modal('hide');
+
+                setTimeout(function() {
+                    location.reload();
+                }, 800);
+            })
+            .fail(function() {
+                $(form)
+                    .find('button[type=submit]')
+                    .text('Guardar');
+                $(form)
+                    .find('button')
+                    .removeAttr('disabled');
+
+                $(form)
+                    .find('.alert')
+                    .removeClass('alert-success')
+                    .addClass('alert-danger')
+                    .html('Ha ocurrido un error, intente nuevamente')
+                    .show();
+            });
+
+        return false;
     });
 });
