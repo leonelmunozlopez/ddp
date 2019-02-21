@@ -83,7 +83,7 @@
                                         class="dropdown-item"
                                         href="{{ route('profile') }}"
                                     >
-                                        {{ __('Mi cuenta') }}
+                                        Mi cuenta
                                     </a>
 
                                     <a
@@ -92,7 +92,7 @@
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"
                                     >
-                                        {{ __('Salir') }}
+                                        Salir
                                     </a>
 
                                     <form

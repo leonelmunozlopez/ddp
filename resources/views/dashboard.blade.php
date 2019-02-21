@@ -5,11 +5,21 @@
             Dinámicas
         </h5>
 
+        @if(count($dynamics) == 0)
+        <div class="card-body">
+            <div class="alert alert-warning text-center">
+                No se han programado dinámicas para votar...<br />
+                <a href="{{ route('createDynamic') }}" class="alert-link"
+                    >registrar nueva</a
+                >
+            </div>
+        </div>
+        @else
         <table class="table table-borderless">
             <thead>
                 <tr>
                     <th scope="col">Código</th>
-                    <th scope="col">Fecha de cierre</th>
+                    <th scope="col" nowrap>Fecha de cierre</th>
                     <th scope="col">Descripción</th>
                     <th scope="col">Proyectos</th>
                     <th scope="col">Estado</th>
@@ -25,10 +35,10 @@
                     </th>
                     <td>{{ $dynamic->ends_at->format('d/m/Y H:i') }} hrs.</td>
                     <td>
-                        {{ $dynamic->description }}
+                        {{ (strlen($dynamic->description) > 100) ? substr($dynamic->description, 0, 100) . '...' : $dynamic->description }}
                     </td>
                     <td>
-                        {{ $dynamic->id }}
+                        {{ $dynamic->projects->count() }}
                     </td>
                     <td>
                         {!! $dynamic->statusLabel() !!}
@@ -40,6 +50,7 @@
         <div class="card-body">
             {{ $dynamics->links() }}
         </div>
+        @endif
     </div>
 </div>
 @endsection
