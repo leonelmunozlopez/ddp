@@ -17,6 +17,8 @@ class CreateProjectsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->text('details');
+            $table->unsignedInteger('dynamic_id');
+            $table->foreign('dynamic_id')->references('id')->on('dynamics');
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
