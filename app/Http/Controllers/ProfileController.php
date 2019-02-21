@@ -21,7 +21,10 @@ class ProfileController extends Controller
     public function update(ProfileRequest $request)
     {
         $user = Auth()->user();
-        $user->update($request->all());
-        return redirect()->to('profile')->with('success', 'Datos actualizados correctamente!');
+        if (!$user->update($request->all())) {
+            return redirect()->route('profile')->with('error', 'Ha ocurrido un error');
+        }
+
+        return redirect()->route('profile')->with('success', 'Datos actualizados correctamente!');
     }
 }

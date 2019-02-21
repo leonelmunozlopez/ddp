@@ -13,7 +13,7 @@
     position: absolute;
     left: 180px;
     top: 12px;
-    bottom: 52px;
+    bottom: 42px;
     width: 6px;
     background: #ddd;
 }
@@ -38,4 +38,12 @@
     background: #fff;
     right: -38px;
     top: 4px;
+}
+
+.time-line .card-body {
+    padding: 0.7rem;
+}
+
+.time-line .card-footer {
+    padding: 0.5rem 0.7rem;
 }
