@@ -15,7 +15,7 @@ class DynamicController extends Controller
 
     public function index()
     {
-        $dynamics = Dynamic::orderBy('ends_at', 'DESC')->paginate();
+        $dynamics = Dynamic::orderBy('ends_at', 'ASC')->paginate();
         return view('dashboard', ['dynamics' => $dynamics]);
     }
 
@@ -33,11 +33,11 @@ class DynamicController extends Controller
             $dynamic->code = $code;
         } while (Dynamic::where('code', $code)->exists());
 
-        if ($dynamic->save()) {
-            return redirect()->route('storeDynamic')->with('success', 'Dinámica creada correctamente');
+        if (!$dynamic->save()) {
+            return redirect()->route('dashboard')->with('error', 'Ha ocurrido un error');
         }
 
-        return redirect()->route('storeDynamic')->with('error', 'Ha ocurrido un error');
+        return redirect()->route('dashboard')->with('success', 'Dinámica creada correctamente');
     }
 
     public function show($code)
@@ -45,4 +45,22 @@ class DynamicController extends Controller
         $dynamic = Dynamic::where('code', $code)->firstOrFail();
         return view('dynamics.show', ['dynamic' => $dynamic]);
     }
+
+    public function edit($code)
+    {
+        $dynamic = Dynamic::where('code', $code)->firstOrFail();
+        return view('dynamics.edit', ['dynamic' => $dynamic]);
+    }
+
+    public function update(DynamicRequest $request, $id)
+    {
+        $dynamic = Dynamic::findOrFail($id);
+
+        if (!$dynamic->update($request->all())) {
+            return redirect()->route('updateDynamic')->with('error', 'Ha ocurrido un error');
+        }
+
+        return redirect()->route('showDynamic', ['code' => $dynamic->code])->with('success', 'Dinámica editada correctamente');
+    }
+
 }

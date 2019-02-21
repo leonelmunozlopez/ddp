@@ -18,6 +18,8 @@
                 <div class="modal-body">
                     @csrf
 
+                    <div class="alert text-center" style="display: none"></div>
+
                     <div class="form-group">
                         <label for="title">Usuario</label>
                         @auth
@@ -56,11 +58,18 @@
                             type="details"
                             name="details"
                             class="form-control autosize"
+                            required
                         >
                         </textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <input
+                        type="hidden"
+                        name="dynamic_id"
+                        value="{{ $dynamic->id }}"
+                    />
+
                     <button type="submit" class="btn btn-primary">
                         Guardar
                     </button>
@@ -159,7 +168,26 @@
                     </div>
                 </div>
 
-                <div class="card text-white text-center bg-danger ">
+                @foreach($dynamic->projects as $project)
+                <div class="card text-white text-center bg-secondary mb-3">
+                    <div class="time-line-date">
+                        {{ $project->created_at->format('d/m/Y H:i') }} hrs.
+                    </div>
+                    <div class="card-body">
+                        <div class="card-text">
+                            {{ $project->title }}
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <small>
+                            publicado por :
+                            {{ ($project->user->name != '') ? $project->user->name : $project->user->email }}
+                        </small>
+                    </div>
+                </div>
+                @endforeach
+
+                <div class="card text-white text-center bg-danger">
                     <div class="time-line-date">
                         {{ $dynamic->ends_at->format('d/m/Y H:i') }} hrs.
                     </div>

@@ -15,9 +15,13 @@ class Dynamic extends Model
         return $this->hasMany('App\Project');
     }
 
+    public function setEndsAtAttribute($value)
+    {
+        $this->attributes['ends_at'] = date('Y-m-d H:i:s', strtotime($value));
+    }
+
     public function statusLabel()
     {
-
         switch ($this->status) {
             case 'closed':
                 $color = 'danger';

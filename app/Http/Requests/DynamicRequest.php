@@ -14,6 +14,11 @@ class DynamicRequest extends FormRequest
      */
     public function authorize()
     {
+        // For testing purposes, allows any logged-in user to create dynamics
+        if (config('app.debug')) {
+            return Auth::check();
+        }
+
         $user = Auth::user();
         return $user->is_admin;
     }

@@ -4,12 +4,13 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    Nueva dinámica
+                    Editar dinámica /
+                    {{ $dynamic->code }}
                 </div>
 
                 <div class="card-body">
                     @if (session('success'))
-                    <div class="alert alert-success text-center">
+                    <div class="alert alert-success">
                         {{ session('success') }}
                     </div>
                     @endif
@@ -17,9 +18,9 @@
                     <form
                         id="dynamicForm"
                         method="POST"
-                        action="{{ route('storeDynamic') }}"
+                        action="{{ route('updateDynamic', ['id' => $dynamic->id]) }}"
                     >
-                        @csrf
+                        @csrf @method('PUT')
 
                         <div class="form-group row">
                             <label
@@ -34,7 +35,7 @@
                                     name="ends_at"
                                     type="datetime-local"
                                     class="form-control{{ $errors->has('ends_at') ? ' is-invalid' : '' }}"
-                                    value="{{ old('ends_at') }}"
+                                    value="{{ old('ends_at', $dynamic->ends_at->format('Y-m-d\TH:i:s')) }}"
                                     required
                                 />
 
@@ -60,9 +61,8 @@
                                     id="description"
                                     name="description"
                                     class="form-control autosize {{ $errors->has('description') ? 'is-invalid' : '' }}"
-                                >
-                                {{ old('description') }}
-                            </textarea
+                                    >{{ old('description', $dynamic->description)
+                                    }}</textarea
                                 >
 
                                 @if ($errors->has('description'))
@@ -78,7 +78,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Guardar
+                                    Guardar cambios
                                 </button>
                                 <a
                                     href="{{ route('dashboard') }}"
