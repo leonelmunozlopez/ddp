@@ -20,6 +20,7 @@ class CreateDynamicsTable extends Migration
             $table->text('description');
             $table->timestamp('ends_at')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -15,6 +15,7 @@ class DynamicController extends Controller
 
     public function index()
     {
+        // TODO(lm): add filters, sorting, show deleted, and other stuff
         $dynamics = Dynamic::orderBy('ends_at', 'ASC')->paginate();
         return view('dashboard', ['dynamics' => $dynamics]);
     }
@@ -63,4 +64,18 @@ class DynamicController extends Controller
         return redirect()->route('showDynamic', ['code' => $dynamic->code])->with('success', 'Dinámica editada correctamente');
     }
 
+    public function delete($id)
+    {
+        $dynamic = Dynamic::findOrFail($id);
+
+        if (!$dynamic->delete()) {
+            return response()->json(['error' => 'Could not delete the dyanmic ID ' . $id], 500);
+        }
+
+        // Update status
+        $dynamic->status = 'deleted';
+        $dynamic->update();
+
+        return response()->json(['url' => route('dashboard')]);
+    }
 }

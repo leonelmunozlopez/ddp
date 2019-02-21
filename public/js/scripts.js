@@ -67,9 +67,7 @@ $(document).ready(function() {
                     location.reload();
                 }, 800);
             })
-            .fail(function(x, s, e) {
-                console.log(x, s, e);
-
+            .fail(function() {
                 $(form)
                     .find('button[type=submit]')
                     .text('Guardar');
@@ -86,5 +84,28 @@ $(document).ready(function() {
             });
 
         return false;
+    });
+
+    // Delete
+    $('#deleteDynamic').click(function(event) {
+        event.preventDefault();
+
+        if (!confirm('Está seguro que desea eliminar esta dinámica?')) {
+            return;
+        }
+
+        $.ajax({
+            method: 'DELETE',
+            url: $(this).attr('href'),
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            },
+        })
+            .done(function(data) {
+                location.href = data.url;
+            })
+            .fail(function() {
+                alert('Ha ocurrido un error, intente nuevamente');
+            });
     });
 });

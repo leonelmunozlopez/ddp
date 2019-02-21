@@ -27,6 +27,9 @@ Route::post('/dinamicas', 'DynamicController@store')->name('storeDynamic');
 Route::get('/dinamicas/{code}', 'DynamicController@show')->name('showDynamic');
 Route::get('/dinamicas/{code}/editar', 'DynamicController@edit')->name('editDynamic');
 Route::put('/dinamicas/{id}', 'DynamicController@update')->name('updateDynamic');
+Route::put('/dinamicas/{id}/open', 'DynamicController@open')->name('openDynamic');
+Route::put('/dinamicas/{id}/close', 'DynamicController@close')->name('closeDynamic');
+Route::delete('/dinamicas/{id}', 'DynamicController@delete')->name('deleteDynamic');
 
 Route::post('/proyectos', 'ProjectController@store')->name('storeProject');
 Route::put('/proyectos/{id}', 'ProjectController@update')->name('updateProject');

@@ -132,11 +132,41 @@
                     <div class="mb-3">
                         <a
                             href="{{ route('editDynamic', ['code' => $dynamic->code]) }}"
-                            class="btn btn-secondary"
+                            class="btn btn-secondary btn-block"
                         >
                             <i class="fa fa-edit"></i>
                             Editar dinámica</a
                         >
+
+                        @if($dynamic->status == 'pending')
+                        <a
+                            id="openDynamic"
+                            href="{{ route('openDynamic', ['id' => $dynamic->id]) }}"
+                            class="btn btn-primary btn-block"
+                        >
+                            <i class="fa fa-lock-open"></i>
+                            Iniciar votaciones</a
+                        >
+                        @endif @if($dynamic->status == 'open')
+                        <a
+                            id="closeDynamic"
+                            href="{{ route('closeDynamic', ['id' => $dynamic->id]) }}"
+                            class="btn btn-success btn-block"
+                        >
+                            <i class="fa fa-clipboard-check"></i>
+                            Finalizar</a
+                        >
+                        @endif
+
+                        <a
+                            id="deleteDynamic"
+                            href="{{ route('deleteDynamic', ['id' => $dynamic->id]) }}"
+                            class="btn btn-danger btn-block"
+                        >
+                            <i class="fa fa-delete"></i>
+                            Eliminar</a
+                        >
+                        <hr />
                     </div>
                     @endauth
 
@@ -145,7 +175,7 @@
                             type="button"
                             data-toggle="modal"
                             data-target="#projectModal"
-                            class="btn btn-success"
+                            class="btn btn-dark btn-block"
                         >
                             <i class="fa fa-lightbulb"></i>
                             Postular proyecto

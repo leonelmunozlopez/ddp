@@ -3,12 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Dynamic extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = ['ends_at', 'description'];
 
-    protected $dates = ['ends_at', 'created_at', 'updated_at'];
+    protected $dates = ['ends_at', 'created_at', 'updated_at', 'deleted_at'];
 
     public function projects()
     {
@@ -23,13 +26,23 @@ class Dynamic extends Model
     public function statusLabel()
     {
         switch ($this->status) {
+            case 'open':
+                $color = 'primary';
+                $label = 'En Votación';
+                break;
+
             case 'closed':
-                $color = 'danger';
+                $color = 'success';
                 $label = 'Cerrado';
                 break;
 
+            case 'deleted':
+                $color = 'dark';
+                $label = 'Eliminado';
+                break;
+
             default:
-                $color = 'warning';
+                $color = 'secondary';
                 $label = 'Pendiente';
                 break;
         }

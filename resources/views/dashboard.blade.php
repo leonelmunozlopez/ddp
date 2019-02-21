@@ -15,8 +15,8 @@
             </div>
         </div>
         @else
-        <table class="table table-borderless">
-            <thead>
+        <table class="table table-borderless table-hover">
+            <thead class="thead-dark">
                 <tr>
                     <th scope="col">Código</th>
                     <th scope="col" nowrap>Fecha de cierre</th>
