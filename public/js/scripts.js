@@ -183,7 +183,7 @@ $(document).ready(function() {
                     location.reload();
                 }, 800);
             })
-            .fail(function() {
+            .fail(function(xhr) {
                 $(form)
                     .find('button[type=submit]')
                     .text('Guardar');
@@ -191,11 +191,17 @@ $(document).ready(function() {
                     .find('button')
                     .removeAttr('disabled');
 
+                var errorMessage = 'Ha ocurrido un error, intente nuevamente';
+                if (xhr.status === 409) {
+                    errorMessage =
+                        'Tu usuario ya envió sus preferencias para esta dinámica';
+                }
+
                 $(form)
                     .find('.alert')
                     .removeClass('alert-success')
                     .addClass('alert-danger')
-                    .html('Ha ocurrido un error, intente nuevamente')
+                    .html(errorMessage)
                     .show();
             });
 

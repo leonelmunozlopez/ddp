@@ -38,6 +38,11 @@ class VoteController extends Controller
         $vote->dynamic_id  = $request->dynamic_id;
         $vote->user_id     = $user->id;
 
+        // Check if this user already sent their preferences
+        if (Vote::where('user_id', $user->id)->where('dynamic_id', $request->dynamic_id)->exists()) {
+            return response()->json(['error' => 'Vote already made'], 409);
+        }
+
         if (!$vote->save()) {
             return response()->json(['error' => 'Could not store yout vote preferences'], 500);
         }
