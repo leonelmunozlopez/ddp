@@ -111,6 +111,31 @@ $(document).ready(function() {
             });
     });
 
+    // Close Dynamic
+    $('#closeDynamic').click(function(event) {
+        event.preventDefault();
+
+        if (
+            !confirm('Está seguro que desea cerrar / finalizar esta dinámica?')
+        ) {
+            return;
+        }
+
+        $.ajax({
+            method: 'PUT',
+            url: $(this).attr('href'),
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            },
+        })
+            .done(function() {
+                location.reload();
+            })
+            .fail(function() {
+                alert('Ha ocurrido un error, intente nuevamente');
+            });
+    });
+
     // Delete
     $('#deleteDynamic').click(function(event) {
         event.preventDefault();

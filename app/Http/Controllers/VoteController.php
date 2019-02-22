@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\VoteRequest;
-use App\Project;
 use App\User;
 use App\Vote;
 use Auth;
@@ -27,14 +26,15 @@ class VoteController extends Controller
             }
         }
 
+        // FULL DATA STORAGE
         // Prepare preferences to store in JSON format
-        $array = [];
-        foreach ($request->preferences as $project_id) {
-            $array[] = Project::where('id', $project_id)
-                ->first(['id', 'title', 'dynamic_id', 'created_at', 'updated_at']);
-        }
+        // $array = [];
+        // foreach ($request->preferences as $project_id) {
+        //     $array[] = Project::where('id', $project_id)
+        //         ->first(['id', 'title', 'dynamic_id', 'created_at', 'updated_at']);
+        // }
 
-        $vote->preferences = json_encode($array);
+        $vote->preferences = json_encode($request->preferences, JSON_NUMERIC_CHECK);
         $vote->dynamic_id  = $request->dynamic_id;
         $vote->user_id     = $user->id;
 

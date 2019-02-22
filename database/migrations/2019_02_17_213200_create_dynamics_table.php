@@ -17,7 +17,8 @@ class CreateDynamicsTable extends Migration
             $table->increments('id');
             $table->string('code');
             $table->string('status')->default('pending');
-            $table->text('description');
+            $table->text('description')->nullable();
+            $table->json('results')->nullable();
             $table->timestamp('ends_at')->nullable();
             $table->timestamps();
             $table->softDeletes();

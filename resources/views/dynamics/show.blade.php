@@ -74,8 +74,7 @@
                             <i class="fa fa-clipboard-check"></i>
                             Finalizar</a
                         >
-                        @endif
-
+                        @endif @if($dynamic->status != 'closed')
                         <a
                             id="deleteDynamic"
                             href="{{ route('deleteDynamic', ['id' => $dynamic->id]) }}"
@@ -85,6 +84,7 @@
                             Eliminar</a
                         >
                         <hr />
+                        @endif
                     </div>
                     @endauth
 
@@ -122,6 +122,29 @@
             </div>
         </div>
         <div class="col-md-8">
+            @if(count($results) > 0)
+            <div class="results">
+                <h2>Resultados de la votación</h2>
+                <ul class="list-group">
+                    @foreach($results as $key => $project)
+
+                    <li class="list-group-item">
+                        <span class="badge badge-primary badge-pill">
+                            {{ $key + 1 }}
+                        </span>
+
+                        {{ $project->title }}
+
+                        @if($key == 0)
+                        <span style="float: right;">
+                            <i class="fa fa-trophy"></i>
+                        </span>
+                        @endif
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
+            @else
             <div class="time-line">
                 <div class="card text-white text-center bg-info mb-3">
                     <div class="time-line-date">
@@ -165,6 +188,7 @@
                     </div>
                 </div>
             </div>
+            @endif
         </div>
     </div>
 </div>

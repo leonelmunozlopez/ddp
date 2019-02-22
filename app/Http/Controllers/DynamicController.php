@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Dynamic;
 use App\Http\Requests\DynamicRequest;
+use App\Project;
 use Illuminate\Support\Str;
 
 class DynamicController extends Controller
@@ -44,7 +45,16 @@ class DynamicController extends Controller
     public function show($code)
     {
         $dynamic = Dynamic::where('code', $code)->firstOrFail();
-        return view('dynamics.show', ['dynamic' => $dynamic]);
+
+        $results = [];
+
+        if ($dynamic->results) {
+            foreach (json_decode($dynamic->results) as $project_id) {
+                $results[] = Project::findOrFail($project_id);
+            }
+        }
+
+        return view('dynamics.show', ['dynamic' => $dynamic, 'results' => $results]);
     }
 
     public function edit($code)
@@ -75,6 +85,58 @@ class DynamicController extends Controller
         return response()->json('success');
     }
 
+    public function close($id)
+    {
+        $dynamic = Dynamic::findOrFail($id);
+
+        // Instant-runoff voting
+        $votes = [];
+        foreach ($dynamic->votes as $vote) {
+            $votes[] = json_decode($vote->preferences);
+        }
+        // dd($votes);
+
+        $results = [];
+        do {
+            $counts = [];
+            foreach ($votes as $ids) {
+                $key = strval($ids[0]);
+
+                // Counts firsts
+                if (!isset($counts[$key])) {
+                    $counts[$key] = 0;
+                }
+                $counts[$key]++;
+            }
+            arsort($counts); // Sort count
+
+            // Drop last from votes
+            $aux = [];
+            foreach ($votes as $vote) {
+                foreach (array_keys($vote, $this->getLastKey($counts), true) as $key) {
+                    if (!in_array($vote[$key], $results)) {
+                        $results[] = $vote[$key];
+                    }
+
+                    unset($vote[$key]);
+                    $aux[] = array_values($vote);
+                }
+            }
+            $votes = $aux; //New votes
+
+        } while (count($votes[0]) > 0);
+
+        // Revert results
+        $results = array_reverse($results);
+
+        // Update data
+        $dynamic->status  = 'closed';
+        $dynamic->results = json_encode($results);
+        $dynamic->update();
+
+        return response()->json('success');
+    }
+
     public function delete($id)
     {
         $dynamic = Dynamic::findOrFail($id);
@@ -88,5 +150,13 @@ class DynamicController extends Controller
         $dynamic->update();
 
         return response()->json('success');
+    }
+
+    // Helper function
+    public function getLastKey($array)
+    {
+        end($array);
+        return key($array);
+
     }
 }
