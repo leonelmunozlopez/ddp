@@ -1,8 +1,9 @@
-@extends('layouts.app') @section('content')
+@extends('layouts.app')
+<!-- section -->
+@section('content')
 
-<div>
-    @include('vote.modal') @include('dynamics.project-modal')
-</div>
+<!-- includes -->
+@include('vote.modal') @include('dynamics.project-modal')
 
 <div class="container">
     <div class="row">
@@ -55,7 +56,6 @@
                             <i class="fa fa-edit"></i>
                             Editar dinámica</a
                         >
-
                         @if($dynamic->status == 'pending')
                         <a
                             id="openDynamic"
@@ -100,6 +100,13 @@
                             Postular proyecto
                         </button>
                         @endif @if($dynamic->status == 'open')
+
+                        <!-- Check if user already sent their preferences -->
+                        @if($dynamic->votes()->where('user_id',Auth::id())->exists())
+                        <div class="alert alert-info text-center">
+                            Ya votaste ;)
+                        </div>
+                        @else
                         <button
                             type="button"
                             data-toggle="modal"
@@ -109,7 +116,7 @@
                             <i class="fa fa-vote-yea"></i>
                             VOTAR
                         </button>
-                        @endif
+                        @endif @endif
                     </div>
                 </div>
             </div>

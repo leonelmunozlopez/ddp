@@ -151,6 +151,14 @@ $(document).ready(function() {
     $('#voteForm').submit(function(event) {
         event.preventDefault();
 
+        if (
+            !confirm(
+                'Está seguro que desea enviar sus preferencias en este orden?'
+            )
+        ) {
+            return;
+        }
+
         var form = $(this);
 
         $(form)
@@ -169,11 +177,11 @@ $(document).ready(function() {
                     .html('Preferencias enviadas correctamente')
                     .show();
 
-                // $('#voteModal').modal('hide');
+                $('#voteModal').modal('hide');
 
-                // setTimeout(function() {
-                //     location.reload();
-                // }, 800);
+                setTimeout(function() {
+                    location.reload();
+                }, 800);
             })
             .fail(function() {
                 $(form)
