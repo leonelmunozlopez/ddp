@@ -15,6 +15,8 @@
             </div>
         </div>
         @else
+
+        <!-- TODO(lm): Add filters, can display deleted dyanmics for example -->
         <div class="table-responsive">
             <table class="table table-borderless table-hover">
                 <thead class="thead-dark">

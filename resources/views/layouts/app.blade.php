@@ -22,7 +22,10 @@
     </head>
     <body>
         <div id="app">
-            <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+            <!-- TODO(lm): Add logo and more styling -->
+            <nav
+                class="navbar navbar-dark bg-dark navbar-expand-md navbar-light navbar-laravel"
+            >
                 <div class="container">
                     <a class="navbar-brand" href="{{ url('/') }}">
                         Dinámica de Proyectos
@@ -75,6 +78,7 @@
                                     <span class="caret"></span>
                                 </a>
 
+                                <!-- TODO(lm): Add menu to users administration -->
                                 <div
                                     class="dropdown-menu dropdown-menu-right"
                                     aria-labelledby="navbarDropdown"
@@ -125,6 +129,7 @@
         </div>
 
         <!-- Scripts -->
+        <!-- TODO(lm): ADd gulp -->
         <script src="{{ asset('js/app.js') }}" defer></script>
         <script src="{{ asset('js/autosize.min.js') }}" defer></script>
         <script src="{{ asset('js/clipboard.min.js') }}" defer></script>

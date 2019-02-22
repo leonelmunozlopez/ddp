@@ -121,6 +121,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- TODO(lm): Add more options, maybe tabs to see details and other stuff -->
         <div class="col-md-8">
             @if(count($results) > 0)
             <div class="results">
