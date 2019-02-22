@@ -7,8 +7,8 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-4">
-            <div class="card">
+        <div class="col-md-4">
+            <div class="card mb-3">
                 <h5 class="card-header">
                     {{ $dynamic->code }}
 
@@ -121,7 +121,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-8">
+        <div class="col-md-8">
             <div class="time-line">
                 <div class="card text-white text-center bg-info mb-3">
                     <div class="time-line-date">

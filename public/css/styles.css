@@ -47,3 +47,14 @@
 .time-line .card-footer {
     padding: 0.5rem 0.7rem;
 }
+
+@media (max-width: 678px) {
+    .time-line {
+        padding-left: 140px;
+        padding-right: 0;
+    }
+
+    .time-line::before {
+        left: 100px;
+    }
+}

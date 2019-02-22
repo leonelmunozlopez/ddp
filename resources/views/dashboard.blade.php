@@ -15,38 +15,42 @@
             </div>
         </div>
         @else
-        <table class="table table-borderless table-hover">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Código</th>
-                    <th scope="col" nowrap>Fecha de cierre</th>
-                    <th scope="col">Descripción</th>
-                    <th scope="col">Proyectos</th>
-                    <th scope="col">Estado</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($dynamics as $dynamic)
-                <tr>
-                    <th scope="row">
-                        <a href="{{ url('/dinamicas/' . $dynamic->code) }}">
-                            {{ $dynamic->code }}
-                        </a>
-                    </th>
-                    <td>{{ $dynamic->ends_at->format('d/m/Y H:i') }} hrs.</td>
-                    <td>
-                        {{ (strlen($dynamic->description) > 100) ? substr($dynamic->description, 0, 100) . '...' : $dynamic->description }}
-                    </td>
-                    <td>
-                        {{ $dynamic->projects->count() }}
-                    </td>
-                    <td>
-                        {!! $dynamic->statusLabel() !!}
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-borderless table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Código</th>
+                        <th scope="col" nowrap>Fecha de cierre</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Proyectos</th>
+                        <th scope="col">Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($dynamics as $dynamic)
+                    <tr>
+                        <th scope="row">
+                            <a href="{{ url('/dinamicas/' . $dynamic->code) }}">
+                                {{ $dynamic->code }}
+                            </a>
+                        </th>
+                        <td>
+                            {{ $dynamic->ends_at->format('d/m/Y H:i') }} hrs.
+                        </td>
+                        <td>
+                            {{ (strlen($dynamic->description) > 100) ? substr($dynamic->description, 0, 100) . '...' : $dynamic->description }}
+                        </td>
+                        <td>
+                            {{ $dynamic->projects->count() }}
+                        </td>
+                        <td>
+                            {!! $dynamic->statusLabel() !!}
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
         <div class="card-body">
             {{ $dynamics->links() }}
         </div>
